@@ -1,30 +1,82 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+
+  <div class="md:flex flex-col md:flex-row min-h-screen w-full">
+      <Sidebar :color="color"></Sidebar>
+      <div class="px-10 w-full">
+        <router-view/>
+      </div>
   </div>
-  <router-view/>
+
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style type="text/css">
+
+@font-face{
+  font-family: 'Lato';
+  src: url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 }
 
-#nav {
-  padding: 30px;
+*{
+  font-family: "Lato"
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+input:focus, textarea:focus, select:focus{
+  outline: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.pointer{
+  cursor: pointer;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 </style>
+
+<script>
+import Sidebar from "./components/sidebar.vue";
+
+export default {
+  data(){
+    return{
+      color : {
+        primary : "#43c079"
+      },
+    }
+  },
+  components : {
+    Sidebar
+  }
+}
+
+</script>
+
