@@ -1,11 +1,11 @@
-# jaya_abadi
+# Jaya Abadi Program
 
-## Project setup
+## Project Setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Run Project
 ```
 npm run serve
 ```
@@ -14,6 +14,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

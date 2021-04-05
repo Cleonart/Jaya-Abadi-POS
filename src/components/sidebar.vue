@@ -84,11 +84,11 @@
 		              },
 		              {
 		                name : "Supplier",
-		                link : "#"
+		                link : "/#/master/supplier"
 		              },
 		              {
 		                name : "Pelanggan",
-		                link : "#"
+		                link : "/#/master/pelanggan"
 		              },
 					  {
 		                name : "Nomor Faktur",
@@ -96,7 +96,7 @@
 		              },
 		              {
 		                name : "Pengguna",
-		                link : "#"
+		                link : "/#/master/pengguna"
 		              }]
 		          },
 		          {

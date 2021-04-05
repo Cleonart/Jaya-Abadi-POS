@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<ComponentForms 
-			title="Tambahkan Merek Baru"
-			url_get="/pengaturan/merek/form"
-			url_post="/pengaturan/merek/form/post"></ComponentForms>
+			title="Tambahkan Supplier Baru"
+			url_get="/master/supplier/form"
+			url_post="/master/supplier/form/post"></ComponentForms>
 	</div>
 </template>
 

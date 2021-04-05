@@ -6,6 +6,15 @@ import Home from '../views/Home.vue'
 import TabelBarang from '../views/master/barang/tabel.vue'
 import FormBarang from '../views/master/barang/form.vue'
 
+import TabelPengguna from '../views/master/pengguna/tabel.vue'
+import FormPengguna from '../views/master/pengguna/form.vue'
+
+import TabelSupplier from '../views/master/supplier/tabel.vue'
+import FormSupplier from '../views/master/supplier/form.vue'
+
+import TabelPelanggan from '../views/master/pelanggan/tabel.vue'
+import FormPelanggan from '../views/master/pelanggan/form.vue'
+
 import Form from '../components/form.vue'
 
 // penjualan
@@ -26,6 +35,8 @@ const routes = [
     name: 'Dashboard',
     component: Home
   },
+
+  /* Master Barang */
   {
     path: '/master/barang/:id',
     name: "Mutasi Barang",
@@ -35,6 +46,42 @@ const routes = [
     path: '/master/barang',
     name: "Barang",
     component : TabelBarang
+  },
+
+  /* Master Supplier */
+  {
+    path: '/master/supplier/:id',
+    name: "Mutasi Supplier",
+    component : FormSupplier
+  },
+  {
+    path: '/master/supplier',
+    name: "Supplier",
+    component : TabelSupplier
+  },
+
+  /* Master Pelanggan */
+  {
+    path: '/master/pelanggan/:id',
+    name: "Mutasi Pelanggan",
+    component : FormPelanggan
+  },
+  {
+    path: '/master/pelanggan',
+    name: "Pelanggan",
+    component : TabelPelanggan
+  },
+
+  /* Master Pengguna */
+  {
+    path: '/master/pengguna/:id',
+    name: "Mutasi Pengguna",
+    component : FormPengguna
+  },
+  {
+    path: '/master/pengguna',
+    name: "Penggguna",
+    component : TabelPengguna
   },
   
   {
@@ -65,6 +112,18 @@ const routes = [
     path: '/pengaturan/kategori',
     name: "Kategori",
     component : TabelKategori
+  },
+
+  /* Pengaturan Merek */
+  {
+    path: '/pengaturan/merek/:id',
+    name: "Mutasi Merek",
+    component : FormMerek
+  },
+  {
+    path: '/pengaturan/merek',
+    name: "Merek",
+    component : TabelMerek
   },
 
 ]
