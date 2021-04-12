@@ -39,7 +39,7 @@
 				</tbody>
 			</table>
 
-			<p v-if="table_body.length <= 0" class="relative mx-5 w-full bg-red-100 text-red-500 font-semibold text-1xl pl-5 py-4 rounded-md">Tidak ada data ditemukan :(</p>
+			<p v-if="table_body.length <= 0" class="relative mx-5 w-auto bg-red-100 text-red-500 font-semibold text-1xl pl-5 py-4 rounded-md">Tidak ada data ditemukan :(</p>
 
 			<div class="flex mb-10 mt-5 ml-4">
 		    	<p  v-for="item in pagination_num_of_page"  

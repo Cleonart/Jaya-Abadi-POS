@@ -1,12 +1,10 @@
 <template>
-
   <div class="md:flex flex-col md:flex-row min-h-screen w-full">
       <Sidebar :color="color"></Sidebar>
-      <div class="px-10 w-full">
+      <div class="w-full">
         <router-view/>
       </div>
   </div>
-
 </template>
 
 <style type="text/css">
@@ -42,7 +40,7 @@ input[type=number] {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 15px;
 }
 
 /* Track */

@@ -17,6 +17,10 @@ import FormPelanggan from '../views/master/pelanggan/form.vue'
 
 import Form from '../components/form.vue'
 
+// pembelian
+import PurchaseOrder from '../views/pembelian/order/main.vue'
+import PurchaseOrderHandler from '../views/pembelian/order/handler.vue'
+
 // penjualan
 import POS from '../views/penjualan/pos/index.vue'
 
@@ -84,6 +88,18 @@ const routes = [
     component : TabelPengguna
   },
   
+  /* Pembelian */
+  {
+    path: '/pembelian/order',
+    name: "Order Pembelian",
+    component : PurchaseOrder
+  },
+  {
+    path: '/pembelian/order/id/:id',
+    name: "Order Baru",
+    component : PurchaseOrderHandler
+  },
+
   {
     path: '/penjualan/pos',
     name: "Point of Sales",

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="px-10">
 		<ComponentForms 
 			title="Tambahkan Pelanggan Baru"
 			url_get="/master/pelanggan/form"

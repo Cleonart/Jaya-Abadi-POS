@@ -1,11 +1,12 @@
 <template>
 
-	<div>
+	<div class="relative h-full">
 
 		<!-- sidebar -->
-		<div class="md:w-60"></div>
+		<div class="md:w-56"></div>
 
 		<div class="w-full sm:w-full md:overflow-y md:pb-3 md:w-56 overflow-y-scroll h-auto md:h-full pl-2 pr-2 pb-1 shadow-lg md:fixed"
+
 			:style="{backgroundColor : color.primary}">
 			
 			<!-- header -->
@@ -106,11 +107,11 @@
 		            child  : [
 		              {
 		                name : "Purchase Order",
-		                link : '#'
+		                link : '/#/pembelian/order'
 		              },
 		              {
 		                name : "Pembelian",
-		                link : '#'
+		                link : '/#/pembelian/order/id/baru'
 		              },
 		              {
 		                name : "Retur Beli",

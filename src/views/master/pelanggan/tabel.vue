@@ -1,5 +1,5 @@
 <template>	
-	<div>
+	<div class="px-10">
 		<div class="relative flex">
 			<div class="w-full md:w-1/2">
 				<p class="font-bold text-3xl mt-6 mb-1">Daftar Pelanggan</p>
