@@ -40,7 +40,7 @@ input[type=number] {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 5px;
 }
 
 /* Track */

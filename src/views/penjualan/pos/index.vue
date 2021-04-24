@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full md:flex">
+	<div class="w-full md:flex pl-5">
 		<div class="w-full md:w-7/12 md:pr-8">
 			<p class="font-bold text-3xl mt-6">Daftar Barang</p>
 			<p class="text-sm text-gray-400 mt-1.5">Barang yang dipilih akan dimasukan ke dalam order</p>

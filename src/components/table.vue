@@ -19,6 +19,11 @@
 					     		  {{item.text}}
 					     	</span>
 
+					     	<span v-if="item.type == 'badge_danger'" 
+					     		  class="rounded-full bg-red-100 text-red-700 px-4 py-1.5">
+					     		  {{item.text}}
+					     	</span>
+
 					     	<span v-else-if="item.type == 'text'">
 					     		  {{item.text}}
 					     	</span>
@@ -28,10 +33,13 @@
 					     	</span>
 
 					    </td>
-
 					    <td class="p-3 px-5 py-4">
 		                    <div class="flex">
-		                    	<svg class="py-2 px-2 bg-green-100 text-green-700 mr-2 pointer rounded-md w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+		                    	<span v-for="button in buttons">
+		                    		<a v-if="button.type == 'url'" :href="button.url + '/' + container_item[0].text">
+		                    			<svg class="py-2 px-2 bg-green-100 text-green-700 mr-2 pointer rounded-md w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+		                    		</a>
+		                    	</span>
 		                    </div>
 		                </td>
 		                
@@ -56,7 +64,7 @@
 	import {formatRupiah} from '../functions/universal.js';
 
 	export default{
-		props : ["table_head", "table_body"],
+		props : ["table_head", "table_body", "buttons"],
 		data(){
 			return{
 				pagination_per_page    : 10,
