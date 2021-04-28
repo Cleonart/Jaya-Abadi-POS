@@ -22,7 +22,11 @@
 					<input type="number" class="border-none w-16 text-center font-bold" min="1" v-model="item.qty">
 					<svg @click="item.qty++" class="w-10 py-2 px-2 bg-gray-100 rounded-md" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
 				</div>
-				<p class="w-3/12 text-right text-sm bold py-2 px-2 w-16 text-center font-bold">Rp. {{item.qty * item.price}}</p>
+				<div class="w-3/12 text-right text-sm bold py-2 px-2 w-16 text-center font-bold">
+					<p>Rp. {{item.qty * item.price}}</p>
+					<p class="text-blue-600 text-sm underline">Rubah harga</p>
+				</div>
+				
 			</div>
 		</div>
 
