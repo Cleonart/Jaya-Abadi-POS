@@ -3,17 +3,15 @@
 	<div class="relative h-full">
 
 		<!-- sidebar -->
-		<div class="md:w-56"></div>
-
-		<div class="w-full sm:w-full md:overflow-y md:pb-3 md:w-56 overflow-y-scroll h-auto md:h-full pl-2 pr-2 pb-1 shadow-lg md:fixed"
+		<div class="md:w-60"></div>
+		<div class="w-full sm:w-full md:overflow-y md:pb-3 md:w-60 overflow-y-scroll h-auto md:h-full pl-2 pr-2 pb-1 shadow-lg md:fixed"
 
 			:style="{backgroundColor : color.primary}">
 			
 			<!-- header -->
 			<div class="px-3 relative">
-				<div>
-					<img src="../assets/logo.png" class="w-32 mx-auto mt-5">
-					<p class="text-sm mb-6 text-white font-semibold mt-0.5 text-center">Aplikasi PoS dan Inventaris</p>
+				<div class="mb-5">
+					<img src="../assets/logo.png" class="w-20 mt-5">
 				</div>
 				<svg @click="dropdown_open = !dropdown_open" class="text-white md:hidden absolute top-1/2 --translate-2/4 transform	 w-8 right-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
 			</div>
@@ -24,8 +22,8 @@
 				<!-- button -->
 				<p class="flex font-bold w-auto pl-4 rounded py-2 text-sm text-white pointer hover:bg-green-600 hover:text-green-200 transition mx-3 bg-green-300 bg-opacity-60 mb-5 relative"><svg class="w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>Point of Sales</p>
 
-				<div v-for="(link,index) in sidebar" :key='index'>
-					<p  class="relative px-3 flex py-2.5 text-white font-semibold text-sm hover:bg-white hover:text-green-500 rounded transition" @click="dropdownOpen(index)">
+				<div v-for="(link,index) in sidebar" :key='index' class="cursor-pointer">
+					<p class="relative px-3 flex py-2.5 text-white font-semibold text-sm hover:bg-white hover:text-green-500 rounded transition" @click="dropdownOpen(index)">
 						<svg class="w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="link.icon" />
 						</svg>
@@ -44,7 +42,7 @@
 				</div>
 				<p class="mt-2 flex font-bold w-auto pl-4 rounded py-2 text-sm text-red-100 pointer hover:bg-red-600 hover:text-red-200 transition mx-3 bg-red-400 mb-5 relative"><svg class="w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>Keluar</p>
 				<div class="h-5"></div>
-				</div>
+			</div>
 	    </div>
 	
 	</div>

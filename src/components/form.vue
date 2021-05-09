@@ -38,8 +38,9 @@
 
 <script type="text/javascript">
 	
-	import {DEFAULT_ENDPOINT} from '../functions/universal.js';
+	import {DEFAULT_ENDPOINT, startLoading} from '../functions/universal.js';
 	const axios = require('axios');
+	const sweet = require('sweetalert2');
 
 	export default{
 		data(){
@@ -52,25 +53,43 @@
 
 			getData : function(id){
 				var app = this;
+				startLoading(sweet);
 				axios.get(DEFAULT_ENDPOINT + this.url_get + "/" + id)
 				 .then(response => {
 				 	app.input_group = response.data;
+				 	sweet.close();
 				 	console.log(response.data)
 				})
 			},
 
 			postData : function(){
-				var app = this;
-				axios({
-					method: 'POST',
-					url: DEFAULT_ENDPOINT + this.url_post,
-					data: app.input_group
-				}).then(response => {
-						if (response.status == 200) {
-							alert("Penambahan data berhasil");
-						}
-						console.log(response);
-					});
+				const app = this;
+
+				sweet.fire({
+					title: 'Anda yakin?',
+					text: "Apakah anda yakin ingin menambahkan transaksi pembelian ini?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#2ecc71',
+					cancelButtonColor: '#e74c3c',
+					confirmButtonText: 'Ya, Tambahkan'
+				}).then((result) => {
+					if(result.isConfirmed){
+						startLoading(sweet);
+						axios({
+							method: 'POST',
+							url: DEFAULT_ENDPOINT + app.url_post,
+							data: app.input_group
+						}).then(response => {
+							if (response.status == 200) {
+								sweet.fire("Proses Berhasil", "Penambahan dan perubahan data berhasil dilakukan", "success");
+							}
+							else{
+								sweet.close();
+							}
+						});
+					}
+				});
 			}
 		},
 		created(){

@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Dashboard from '../views/Home.vue'
-import Home from '../views/Home.vue'
 
 // master
 import TabelBarang from '../views/master/barang/tabel.vue'
@@ -22,6 +20,7 @@ import PurchaseOrder from '../views/pembelian/order/main.vue'
 import PurchaseOrderHandler from '../views/pembelian/order/handler.vue'
 
 // penjualan
+import SalesOrder from '../views/penjualan/sales/handler.vue'
 import POS from '../views/penjualan/pos/index.vue'
 
 // pengaturan
@@ -34,11 +33,6 @@ import FormMerek from '../views/pengaturan/merek/form.vue'
 
 
 const routes = [
-  {
-    path: '/',
-    name: 'Dashboard',
-    component: Home
-  },
 
   /* Master Barang */
   {
@@ -104,6 +98,11 @@ const routes = [
     path: '/penjualan/pos',
     name: "Point of Sales",
     component : POS
+  },
+  {
+    path: '/penjualan/sales',
+    name: "Penjualan",
+    component: SalesOrder
   },
 
   /* Pengaturan Satuan */

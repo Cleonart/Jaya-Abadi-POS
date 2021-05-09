@@ -61,7 +61,7 @@ input[type=number] {
 </style>
 
 <script>
-import Sidebar from "./components/sidebar.vue";
+import Sidebar from "./modules/sidebar.vue";
 
 export default {
   data(){

@@ -34,13 +34,7 @@
 
 					    </td>
 					    <td class="p-3 px-5 py-4">
-		                    <div class="flex">
-		                    	<span v-for="button in buttons">
-		                    		<a v-if="button.type == 'url'" :href="button.url + '/' + container_item[0].text">
-		                    			<svg class="py-2 px-2 bg-green-100 text-green-700 mr-2 pointer rounded-md w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-		                    		</a>
-		                    	</span>
-		                    </div>
+					    	<slot></slot>
 		                </td>
 		                
 					</tr>
@@ -49,11 +43,12 @@
 
 			<p v-if="table_body.length <= 0" class="relative mx-5 w-auto bg-red-100 text-red-500 font-semibold text-1xl pl-5 py-4 rounded-md">Tidak ada data ditemukan :(</p>
 
-			<div class="flex mb-10 mt-5 ml-4">
-		    	<p  v-for="item in pagination_num_of_page"  
+			<div class="flex mb-4 mt-5 ml-4">
+				<span class="text-xs text-gray-500 font-bold py-2 mr-5">MENAMPILKAN {{pagination_start}}-{{pagination_end}} DARI {{table_body.length}}</span>
+		    	<span  v-for="item in pagination_num_of_page"  
 		    		@click="navigateToPage(item)"
 		    		:class="{'bg-green-600 font-bold text-white' : item == pagination_page_now}" 
-		    		class="rounded-full pointer py-2 px-2 w-10 text-center mr-1 h-10 bg-green-100">{{item}}</p>
+		    		class="rounded-md text-sm pointer py-2 px-3 text-center mr-1 bg-green-100">{{item}}</span>
 		    </div>
 		</div>
 	</div>
@@ -67,11 +62,11 @@
 		props : ["table_head", "table_body", "buttons"],
 		data(){
 			return{
-				pagination_per_page    : 10,
+				pagination_per_page    : 50,
 				pagination_num_of_page : 1,
 				pagination_page_now    : 1,
 				pagination_start       : 1, 
-				pagination_end         : 10
+				pagination_end         : 50
 			}
 		},
 		methods : {
