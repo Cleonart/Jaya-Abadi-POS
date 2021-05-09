@@ -9,15 +9,6 @@
 
 <style type="text/css">
 
-@font-face{
-  font-family: 'Lato';
-  src: url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-}
-
-*{
-  font-family: "Lato"
-}
-
 input:focus, textarea:focus, select:focus{
   outline: none;
 }

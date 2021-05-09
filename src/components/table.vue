@@ -31,10 +31,10 @@
 					     	<span v-else-if="item.type == 'price'">
 					     		  {{formatRupiah(item.text)}}
 					     	</span>
-
 					    </td>
+
 					    <td class="p-3 px-5 py-4">
-					    	<slot></slot>
+					    	<slot :actionProps="container_item"></slot>
 		                </td>
 		                
 					</tr>
