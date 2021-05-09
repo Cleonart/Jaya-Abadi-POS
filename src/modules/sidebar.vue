@@ -1,7 +1,7 @@
 <template>
 
-	<div class="relative h-full">
-
+	<div class="relative h-full bg-green-600">
+		
 		<!-- sidebar -->
 		<div class="md:w-60"></div>
 		<div class="w-full sm:w-full md:overflow-y md:pb-3 md:w-60 overflow-y-scroll h-auto md:h-full pl-2 pr-2 pb-1 shadow-lg md:fixed"

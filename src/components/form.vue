@@ -35,7 +35,7 @@
 			<!-- Button -->
 			<div class="mt-5 pt-1 border-top-200 border border-b-0 border-l-0 border-r-0">
 				<button class="green-glow-button"><Save class="mr-2 -mt-1"/>Simpan</button>
-				<button class="mt-3 font-semibold px-5 py-3 rounded-md text-red-500 border-red-200" @click="goBack()">Batal</button>
+				<p class="cursor-pointer hover:text-red-50 hover:bg-red-500 transition ml-2 mt-3 font-semibold px-5 py-3 rounded-md text-red-500 border-red-200 inline-block" @click="goBack()">Batal</p>
 			</div>
 
 		</form>

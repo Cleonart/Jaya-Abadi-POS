@@ -1,45 +1,37 @@
 <template>
-	<div>
-		<div class="w-full overflow-x-auto ">
-			<table class="overflow-x-auto w-full text-md bg-white rounded mb-4">
-				<tbody>
-					<tr class="text-xs text-green-500 bg-green-50 rounded">
-						<th v-for="head in table_head" class="text-left p-3 px-6">{{head}}</th>
-					</tr>
-					<tr v-for="(container_item,index) in table_body"
-						v-show="((index + 1) >= pagination_start && index <= pagination_end)"
-						:class="{'bg-gray-50' : (index % 2 > 0)}"
-					    class="hover:bg-green-200 transition pointer text-sm font-semibold text-gray-800">
+	<div class="w-full overflow-x-auto ">
+		<table class="overflow-x-auto w-full text-md bg-white rounded mb-4">
+			<tbody>
+				<tr class="text-xs text-green-500 bg-green-50 border-t border-b border-green-200 rounded">
+					<th v-for="head in table_head" class="text-left p-3 px-6">{{head}}</th>
+				</tr>
+				<tr v-for="(container_item,index) in table_body"
+					v-show="((index + 1) >= pagination_start && index <= pagination_end)"
+					:class="{'bg-gray-50' : (index % 2 > 0)}"
+					class="hover:bg-green-200 transition border-b border-gray-200 pointer text-sm font-semibold text-gray-800">
 
-					    <td v-for="item in container_item"
-					     	class="p-3 px-6 py-3">
+					<td v-for="item in container_item"
+						class="p-3 px-6 py-3">
 
-					     	<span v-if="item.type == 'badge'" 
-					     		  class="rounded-full bg-green-100 text-green-700 px-4 py-1.5">
-					     		  {{item.text}}
-					     	</span>
+						<!-- badge success-->
+						<span v-if="item.type == 'badge'" class="rounded-full bg-green-100 text-green-700 px-4 py-1.5">{{item.text}}</span>
 
-					     	<span v-if="item.type == 'badge_danger'" 
-					     		  class="rounded-full bg-red-100 text-red-700 px-4 py-1.5">
-					     		  {{item.text}}
-					     	</span>
+						<!-- badge danger -->
+						<span v-if="item.type == 'badge_danger'" class="rounded-full bg-red-100 text-red-700 px-4 py-1.5">{{item.text}}</span>
 
-					     	<span v-else-if="item.type == 'text'">
-					     		  {{item.text}}
-					     	</span>
+						<!-- text -->
+						<span v-else-if="item.type == 'text'">{{item.text}}</span>
 
-					     	<span v-else-if="item.type == 'price'">
-					     		  {{formatRupiah(item.text)}}
-					     	</span>
-					    </td>
+						<!-- nominal or price -->
+						<span v-else-if="item.type == 'price'">{{formatRupiah(item.text)}}</span>
+					</td>
 
-					    <td class="p-3 px-5 py-4">
-					    	<slot :actionProps="container_item"></slot>
-		                </td>
-		                
-					</tr>
-				</tbody>
-			</table>
+					<td class="p-3 px-5 py-4">
+						<slot :actionProps="container_item"></slot>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
 			<p v-if="table_body.length <= 0" class="relative mx-5 w-auto bg-red-100 text-red-500 font-semibold text-1xl pl-5 py-4 rounded-md">Tidak ada data ditemukan :(</p>
 
@@ -51,7 +43,6 @@
 		    		class="rounded-md text-sm pointer py-2 px-3 text-center mr-1 bg-green-100">{{item}}</span>
 		    </div>
 		</div>
-	</div>
 </template>
 
 <script type="text/javascript">

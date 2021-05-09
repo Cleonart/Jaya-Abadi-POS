@@ -1,6 +1,7 @@
 <template>
-	<div class="px-10">
+	<div class="bg-gray-50">
 		<ComponentForms 
+			home="/master/supplier"
 			title="Tambahkan Supplier Baru"
 			url_get="/master/supplier/form"
 			url_post="/master/supplier/form/post"></ComponentForms>

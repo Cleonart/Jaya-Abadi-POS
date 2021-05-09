@@ -34,7 +34,7 @@
 	// components
 	import Tables from '@/components/table.vue';
 	import Loading from 'vue-loading-overlay';
-	import UserAdd from '@/assets/icons/user-add.vue'
+	import UserAdd from '@/assets/icons/userAdd.vue'
 
 	// api
 	import {DEFAULT_ENDPOINT} from '../../../functions/universal.js';

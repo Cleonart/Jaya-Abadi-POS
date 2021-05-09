@@ -17,19 +17,28 @@
 				</div>
 			</div>
 		</div>
-		<Tables class="mt-10 px-10" :table_head="table_head" 
-									:table_body="table_body"
-									:buttons="buttons"></Tables>
+		<Tables class="mt-10 px-10" :table_head="table_head" :table_body="table_body">
+			<template v-slot:default="props">
+					<div class="flex my-1">
+						<a :href="'/#/master/supplier/' + props.actionProps[0].text">
+							<span class="px-2 py-2 bg-green-100 text-green-700 mr-2 pointer rounded-md hover:bg-gray-800 hover:text-white transition">
+								<Pencil/>
+							</span>
+						</a>
+					</div>
+				</template>
+		</Tables>
 	</div>
 </template>
 
 <script type="text/javascript">
 	import Tables from '../../../components/table.vue';
+	import Pencil from '@/assets/icons/pencil.vue';
 	import {formatRupiah, DEFAULT_ENDPOINT} from '../../../functions/universal.js';
 	const axios = require('axios')
 
 	export default{
-		components : {Tables},
+		components : {Tables, Pencil},
 		data(){
 			return{
 				search_bar : "",
@@ -51,13 +60,6 @@
 						color : "green",
 						total : 0,
 						len   : 0
-					}
-				],
-				buttons : [
-					{
-						type : 'url',
-						url  : '/#/pembelian/order/id',
-						addId : true
 					}
 				],
 				table_head : ["ID", "SUPPLIER", "TANGGAL INVOICE", "TANGGAL JATUH TEMPO", "STATUS", "TAGIHAN", "AKSI"],

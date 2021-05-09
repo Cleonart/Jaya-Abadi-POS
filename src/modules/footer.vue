@@ -1,5 +1,5 @@
 <template>
-	<footer class="absolute bottom-0 bg-blue-100 w-full px-10 shadow-md py-2">
-		<p class="text-base text-blue-500 font-semibold inline-block">&#169; Mappy v.1.1.0 @2021</p>
+	<footer class="absolute bottom-0 bg-blue-100 w-full px-10 shadow-md py-3">
+		<p class="text-sm text-blue-500 font-semibold inline-block">&#169; Mappy v.1.1.0 @2021</p>
 	</footer>
 </template>
