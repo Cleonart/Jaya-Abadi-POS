@@ -4,14 +4,22 @@
 			<p class="text-2xl font-semibold">{{title}}</p>
 			<p class="text-sm text-gray-500 mt-0.5">{{subtitle}}</p>
 			<div class="absolute right-10 top-1/2 transform -translate-y-2/4">
-				<p @click="refresh()" class="font-bold bg-green-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-green-600">
-					<svg class="h-5 w-5 mr-1 inline-block" :class="refreshAnimation" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg> Segarkan</p>
+				<!-- refresh button -->
+				<p @click="refresh()" 
+				   class="green-glow-button mr-2">
+				   <refresh class="mr-2" :class="refreshAnimation" width="5" height="5"/>Segarkan</p>
+				<!-- help button -->
+				<p class="blue-glow-button"><questionMarkCircle width="5" height="5"/></p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script type="text/javascript">
+	
+	import questionMarkCircle from "@/assets/icons/questionMarkCircle.vue";
+	import refresh from "@/assets/icons/refresh.vue";
+	
 	export default{
 		data(){
 			return{
@@ -22,12 +30,18 @@
 		methods : {
 			refresh : function(){
 				const app = this;
+				// set the animation svg to spin
 				app.refreshAnimation = "animate-spin";
 				setTimeout(function(){
+					// reset the animation class to null
 					app.refreshAnimation = "";
-				},500);
+				},1000);
 				this.$emit('refresh','refresh');
 			}
+		},
+		components : {
+			questionMarkCircle,
+			refresh
 		}
 	}
 </script>

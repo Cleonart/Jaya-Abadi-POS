@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.blue-glow-button{
+	@apply font-bold bg-blue-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-blue-600 inline-block;
+}
+
+.green-glow-button{
+	@apply font-bold bg-green-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-green-600 inline-block;
+}
+
+.green-button{
+	@apply font-bold bg-green-600 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-white inline-block;
+}

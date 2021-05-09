@@ -1,8 +1,13 @@
 <template>
   <div class="md:flex flex-col md:flex-row min-h-screen w-full">
       <Sidebar :color="color"></Sidebar>
-      <div class="w-full">
-        <router-view/>
+      <div class="w-full relative">
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+        <Footer/>
       </div>
   </div>
 </template>
@@ -49,10 +54,19 @@ input[type=number] {
   background: #555; 
 }
 
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 </style>
 
 <script>
-import Sidebar from "./modules/sidebar.vue";
+import Sidebar from "@/modules/sidebar.vue";
+import Footer from "@/modules/footer.vue";
 
 export default {
   data(){
@@ -63,7 +77,8 @@ export default {
     }
   },
   components : {
-    Sidebar
+    Sidebar,
+    Footer
   }
 }
 

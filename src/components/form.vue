@@ -1,13 +1,14 @@
 <template>
-	<div class="pb-4">
+	<div class="pb-10">
 		<Loading :active="loadingState"/>
-		<div class="pb-1 bg-white shadow pt-4 px-10">
-			<p class="text-2xl text-gray-700 font-semibold inline-block">
-				<span @click="goBack()">
-				<svg class="h-8 w-8 rounded-md text-white cursor-pointer hover:bg-gray-900 transition mr-3 bg-green-500 py-1 px-1 inline-block -mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></span>{{title}}</p>
-			<p class="text-sm mt-2 text-gray-500 mb-2">Silahkan mengisi semua data dengan benar</p>
+		<div class="pb-2 bg-white shadow pt-4 px-10 flex">
+			<span @click="goBack()" class="header_form"><ChevronLeft class="-mt-1" /></span>
+			<div class="inline-block ml-2">
+				<p class="text-2xl text-gray-700 font-semibold">{{title}}</p>
+				<p class="text-sm mt-1 text-gray-500 mb-2">Silahkan mengisi semua data dengan benar</p>
+			</div>
 		</div>
-		<form class="mb-12 px-5 mx-10 bg-white rounded-md pt-2 pb-5 mt-8 shadow-md" @submit.prevent="post()"> 
+		<form class="form-container" @submit.prevent="post()"> 
 			<div v-for="input in input_group" class="mt-4">
 
 				<!-- label -->
@@ -31,10 +32,9 @@
 					<option v-for="item in input.option" :value="item.value">{{item.label}}</option>
 				</select>
 			</div>
-
 			<!-- Button -->
 			<div class="mt-5 pt-1 border-top-200 border border-b-0 border-l-0 border-r-0">
-				<button class="bg-green-500 mt-3 font-semibold px-5 py-3 rounded-md text-white mr-2">Simpan</button>
+				<button class="green-glow-button"><Save class="mr-2 -mt-1"/>Simpan</button>
 				<button class="mt-3 font-semibold px-5 py-3 rounded-md text-red-500 border-red-200" @click="goBack()">Batal</button>
 			</div>
 
@@ -42,9 +42,23 @@
 	</div>
 </template>
 
+<style type="text/css" scoped>
+
+	.header_form{
+		@apply rounded-md bg-green-100 text-green-500 px-2 py-1 mr-3 cursor-pointer hover:bg-gray-800 hover:text-white transition text-2xl text-gray-700 font-semibold inline-block  h-10 mt-2;
+	}
+
+	.form-container{
+		@apply mb-12 px-5 mx-10 bg-white rounded-md pt-2 pb-5 mt-8 shadow-md;
+	}
+
+</style>
+
 <script type="text/javascript">
 	
 	import {DEFAULT_ENDPOINT, startLoading} from '../functions/universal.js';
+	import Save from '@/assets/icons/save.vue';
+	import ChevronLeft from '@/assets/icons/chevronLeft.vue';
 	import Loading from 'vue-loading-overlay';
 	const axios = require('axios');
 	const sweet = require('sweetalert2');
@@ -56,7 +70,7 @@
 				input_group : []
 			}
 		},
-		components : {Loading},
+		components : {Loading, Save, ChevronLeft},
 		props : ['title', 'url_get', 'url_post', 'home'],
 		methods : {
 			
@@ -98,6 +112,7 @@
 							app.loadingState = false;
 							if (response.status == 200) {
 								sweet.fire("Proses Berhasil", "Penambahan dan perubahan data berhasil dilakukan", "success");
+								app.goBack();
 							}
 							else{
 								sweet.close();

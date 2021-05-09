@@ -1,24 +1,24 @@
 <template>	
-	<div class="px-10">
-		<div class="relative flex">
-			<div class="w-full md:w-1/2">
-				<p class="font-bold text-3xl mt-6 mb-1">Daftar Pelanggan</p>
-				<p class="mb-7 text-gray-600">Kelola daftar pelanggan disini</p>
-			</div>	
-		</div>
+	<div class="bg-gray-50 h-full">
+		<loading :active="loadingActive"/>
+		<Header title="Daftar Pelanggan" subtitle="Kelola daftar pelanggan disini" @refresh="getDataTable()"/>
 
-		<div class="rounded-md shadow">
+		<div class="rounded-md shadow mx-10 relative bg-white">
 			<div class="flex px-5 pt-4 pb-4">
-				<div class="w-full md:w-4/5">
-					<input type="text" v-model="search_bar" class="text-sm border rounded-full pl-4 w-full md:w-56 py-2" placeholder="Cari Nama Pengguna Disini">
-				</div>
-				<div class="w-full md:w-1/5 relative flex">
-					<div @click="goToAddOrEdit()" class="m-1 w-full md:w-full bg-green-600 py-2 px-5 pointer rounded-full text-sm hover:opacity-80 transition text-white font-semibold">
-						<p class="w-full text-center mt-0.5">+ Tambah Pelanggan</p>
-					</div>
+				<SearchBar class="w-full md:w-4/5" :value="search_bar" placeholder="Cth. John" @input="search_bar = $event.target.value"/>
+				<div class="w-full md:w-1/5 mt-2 font-semibold relative">
+					<p @click="directForm()"  class="green-button right-0 md:absolute"><UserAdd class="mr-2 -mt-1"/>Tambah Pelanggan</p>
 				</div>
 			</div>
-			<Tables :table_head="table_head" :table_body="filteredData"></Tables>
+			<Tables :table_head="table_head" :table_body="filteredData">
+				<template v-slot:default="props">
+					<div class="flex">
+						<a :href="'/#/master/pelanggan/' + props.actionProps[0].text">
+							<svg class="py-2 px-2 bg-green-100 text-green-700 mr-2 pointer rounded-md w-8 hover:bg-gray-800 hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+						</a>
+					</div>
+				</template>
+			</Tables>
 		</div>
 	</div>
 </template>
@@ -26,15 +26,29 @@
 <script>
 
 	const axios = require('axios');
-	import Tables from '../../../components/table.vue';
+
+	// modules
+	import Header from '@/modules/master/header.vue';
+	import SearchBar from '@/modules/master/searchbar.vue';
+	
+	// components
+	import Tables from '@/components/table.vue';
+	import Loading from 'vue-loading-overlay';
+	import UserAdd from '@/assets/icons/user-add.vue'
+
+	// api
 	import {DEFAULT_ENDPOINT} from '../../../functions/universal.js';
 
 	export default{
 		data(){
 			return{
+				// internal control
 				search_bar : "",
-				table_head : ["ID", "NAMA PELANGGAN", "ALAMAT", "KONTAK", "AKSI"],
 				table_body : [],
+				loadingActive : true,
+
+				table_head : ["ID", "NAMA PELANGGAN", "ALAMAT", "KONTAK", "AKSI"],
+				defaultUrl : ""
 			}
 		},
 		computed : {
@@ -48,17 +62,22 @@
 		},
 		methods : {
 
-			goToAddOrEdit : function() {
+			directForm : function() {
 				this.$router.replace("/master/pelanggan/baru");
 			},
 
 			getDataTable : function() {
 				var app = this;
-				app.table_body = [];
-				axios.get(DEFAULT_ENDPOINT + "/master/pelanggan/tabel")
+				app.loadingActive = true;
+				app.defaultUrl = DEFAULT_ENDPOINT + "/master/pelanggan/tabel";
+				axios.get(app.defaultUrl)
 					 .then(response => {
-					 	console.log(response);
 					 	app.table_body = response.data;
+					 	setTimeout(function(){app.loadingActive = false}, 500);
+					 })
+					 .catch(response => {
+					 	alert("Terjadi masalah dengan jaringan anda :(");
+					 	app.loadingActive = false;
 					 })
 			}
 		},
@@ -67,6 +86,6 @@
 			this.getDataTable();
 		},
 		
-		components : { Tables }
+		components : { Header, Tables, SearchBar, Loading, UserAdd }
 	}
 </script>
