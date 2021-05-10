@@ -1,6 +1,7 @@
 var TEST_ENVIRONMENT = "http://127.0.0.1:5000";
 var PROD_ENVIRONMENT = "http://bytefrost.sytes.net:5000";
-export var DEFAULT_ENDPOINT = TEST_ENVIRONMENT;
+var PUBLISH_ENVIRONMENT = "http://jayaabadipratama.com:5000";
+export var DEFAULT_ENDPOINT = PUBLISH_ENVIRONMENT;
 
 export function formatRupiah(angka, prefix){
 	var number_string = angka.replace(/[^,\d]/g, '').toString();

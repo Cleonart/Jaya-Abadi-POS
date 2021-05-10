@@ -105,11 +105,11 @@
 		            child  : [
 		              {
 		                name : "Daftar",
-		                link : '/#/pembelian/order'
+		                link : '/#/order/pembelian'
 		              },
 		              {
 		                name : "Pembelian",
-		                link : '/#/pembelian/order/id/baru'
+		                link : '/#/order/pembelian/nomor/baru'
 		              },
 		              {
 		                name : "Retur Beli",

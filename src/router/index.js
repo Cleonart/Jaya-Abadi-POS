@@ -84,6 +84,16 @@ const routes = [
   
   /* Pembelian */
   {
+    path: '/order/pembelian',
+    name: "Menu Order Pembelian",
+    component: PurchaseOrder
+  },
+  {
+    path: '/order/pembelian/nomor/:id',
+    name: 'Form Order Pembelian',
+    component: PurchaseOrderHandler
+  },
+  {
     path: '/pembelian/order',
     name: "Order Pembelian",
     component : PurchaseOrder

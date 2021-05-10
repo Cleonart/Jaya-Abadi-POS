@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-gray-50">
+	<div>
 		<ComponentForms 
 			home="/master/barang"
 			title="Tambahkan Barang Baru"

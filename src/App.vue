@@ -1,8 +1,8 @@
 <template>
   <div class="md:flex flex-col md:flex-row min-h-screen w-full">
       <Sidebar :color="color"></Sidebar>
-      <div class="w-full relative">
-        <router-view class="mb-36" v-slot="{ Component }">
+      <div class="w-full relative bg-gray-50">
+        <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
           </transition>
