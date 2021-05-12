@@ -1,18 +1,28 @@
 <template>
 	<div>
 
-		<formHeader title="Buat Pembelian Baru" subtitle="Order pembelian baru akan dicatat disini"  :total="formatRupiah(pembelian_data.pembelian_total)"/>
+		<formHeader title="Buat Penjualan Baru" subtitle="Order penjualan baru akan dicatat disini" :total="formatRupiah(pembelian_data.pembelian_total)"/>
 
 		<div class="grid grid-cols-3 gap-8 mt-5 px-10 mt-8">
 
-			<Select :value="pembelian_data.pembelian_supplier_id"
-					:options="data_supplier"
-					@model="pembelian_data.pembelian_supplier_id = $event"
-				    class="col-span-1"
-				    label="Pilih Supplier"
-				    required="true"
-				    placeholder="Pilih Supplier"
-				    footnote="Tidak menemukan supplier? <a class='text-blue-600' href='/#/master/supplier/baru'>Tambah baru disini</a>"></Select>
+			<div class="col-1">
+				<Select :value="pembelian_data.order_sales_id"
+						:options="data_pengguna"
+						@model="pembelian_data.order_sales_id = $event"
+					    label="Pilih Sales"
+					    required="true"
+					    placeholder="Pilih Sales"
+					    footnote="Tidak menemukan sales? <a class='text-blue-600' href='/#/master/pengguna/baru'>Tambah baru disini</a>"></Select>
+
+				<Select :value="pembelian_data.order_customer_id"
+						:options="data_pelanggan"
+						@model="pembelian_data.order_customer_id = $event"
+					    class="mt-5"
+					    label="Pilih Pelanggan"
+					    required="true"
+					    placeholder="Pilih Pelanggan"
+					    footnote="Tidak menemukan pelanggan? <a class='text-blue-600' href='/#/master/pelanggan/baru'>Tambah baru disini</a>"></Select>
+			</div>
 
 			<!-- Tanggal, Tanggal Jatuh Tempo -->
 			<div class="col-1">
@@ -177,7 +187,7 @@
 	import Text from '@/components/form_component/text.vue'
 	import Date from '@/components/form_component/date.vue'
 	import Select from '@/components/form_component/select.vue'
-	import Tables from '../../../components/table.vue';
+	import Tables from '@/components/table.vue';
 	
 	// icons
 	import Save from '@/assets/icons/save.vue';
@@ -250,7 +260,7 @@
 			return{
 				pembelian_data : {
 					pembelian_id                  : "",
-					order_type                    : 100,
+					order_type                    : 200,
 					order_sales_id                : "",
 					order_customer_id             : "",
 					pembelian_supplier_id         : "",
@@ -269,7 +279,10 @@
 					barang_harga : '',
 					barang_total : '',
 				},
+
 				data_supplier : [],
+				data_pelanggan : [],
+				data_pengguna : [],
 				data_product  : [],
 				data_satuan   : [],
 				table_head : ["ID", "NAMA PRODUK", "JUMLAH", "SATUAN", "PAJAK", "TOTAL"],
@@ -320,12 +333,14 @@
 			getData : function(){
 				startLoading(sweet);
 				const app = this;
-				axios.get(DEFAULT_ENDPOINT + "/pembelian/order/" + app.$route.params.id)
+				axios.get(DEFAULT_ENDPOINT + "/order/" + app.$route.params.id)
 					 .then(response => {
 					 	console.log(response);
-					 	app.data_supplier = response.data.data_supplier;
-					 	app.data_product  = response.data.data_product;
-					 	app.data_satuan   = response.data.data_satuan;
+					 	app.data_supplier  = response.data.data_supplier;
+					 	app.data_product   = response.data.data_product;
+					 	app.data_satuan    = response.data.data_satuan;
+					 	app.data_pelanggan = response.data.data_pelanggan;
+						app.data_pengguna  = response.data.data_pengguna;
 						sweet.close();
 				})
 			},

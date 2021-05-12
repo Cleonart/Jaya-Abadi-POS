@@ -4,10 +4,11 @@
 		<Header title="Daftar Barang" subtitle="Kelola daftar barang disini" @refresh="getDataTable()"/>
 		
 		<div class="rounded-md shadow mx-10 relative bg-white">
-			<div class="flex px-5 pt-4 pb-4">
+			<div class="flex px-5 pt-4 pb-4 relative">
 				<SearchBar class="w-full md:w-4/5" :value="search_bar" placeholder="Cth. Paku" @input="search_bar = $event.target.value"/>
-				<div class="w-full md:w-1/5 mt-2 font-semibold relative">
-					<p @click="directForm()"  class="green-button right-0 md:absolute"><Plus class="mr-2 -mt-1"/>Tambah Barang</p>
+				<div class="absolute right-10 top-1/2 -translate-y-2/4 transform mt-1">
+					<p @click="directForm()" class="green-button"><Plus class="mr-2 -mt-1"/>Tambah Barang</p>
+					<p @click="directForm()" class="green-glow-button ml-2"><CloudUpload class="mr-2 -mt-1"/>Import CSV</p>
 				</div>
 			</div>
 			<Tables :table_head="table_head" :table_body="filteredData">
@@ -34,7 +35,8 @@
 	// components
 	import Tables from '@/components/table.vue';
 	import Loading from 'vue-loading-overlay';
-	import Plus from '@/assets/icons/plus.vue'
+	import Plus from '@/assets/icons/plus.vue';
+	import CloudUpload from '@/assets/icons/cloudUpload.vue';
 
 	// api
 	import {DEFAULT_ENDPOINT} from '../../../functions/universal.js';
@@ -87,6 +89,6 @@
 			this.getDataTable();
 		},
 		
-		components : { Header, Tables, SearchBar, Loading, Plus }
+		components : { Header, Tables, SearchBar, Loading, Plus, CloudUpload}
 	}
 </script>

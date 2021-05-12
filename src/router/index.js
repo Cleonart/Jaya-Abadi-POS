@@ -20,6 +20,9 @@ import PurchaseOrder from '../views/pembelian/order/main.vue'
 import PurchaseOrderHandler from '../views/pembelian/order/handler.vue'
 
 // penjualan
+import OrderSales from '@/views/order/OrderPenjualan.vue'
+import DataOrderSales from '@/views/order/DataPenjualan'
+
 import SalesOrder from '../views/penjualan/sales/handler.vue'
 import POS from '../views/penjualan/pos/index.vue'
 
@@ -110,9 +113,14 @@ const routes = [
     component : POS
   },
   {
-    path: '/penjualan/sales',
-    name: "Penjualan",
-    component: SalesOrder
+    path: '/order/penjualan',
+    name: "Penjualan Data",
+    component: DataOrderSales 
+  },
+  {
+    path: '/order/penjualan/:id',
+    name: "Penjualan Order",
+    component: OrderSales
   },
 
   /* Pengaturan Satuan */

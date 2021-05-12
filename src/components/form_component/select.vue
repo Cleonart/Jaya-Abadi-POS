@@ -1,8 +1,10 @@
 <template>
-	<div @mouseleave="stats = false" class="cursor-pointer">
-		<div class="w-full" @click="stats = true">
-			<p class="mb-1.5 mt-0 text-gray-800 text-sm">{{label}}<span v-if="required" class="text-red-500">*</span></p>
-			<div class="border w-full py-3.5 rounded-md bg-transparent">
+	<div>
+		<div class="w-full">
+			<p class="form-label">{{label}}<span v-if="required" class="text-red-500">*</span></p>
+			<div @click="openSelect()" @mouseleave="stats = false" 
+				 class="border w-full py-3.5 rounded-md bg-transparent cursor-pointer"
+				 :class="{'text-black bg-gray-100': disabled}">
 				<p class="px-3 relative">
 					<span v-if="item != ''">{{options[item.toString()]}}</span>
 					<span v-else class="text-gray-500">{{placeholder}}</span>
@@ -36,8 +38,16 @@
 			}
 		},
 		methods : {
+			
+			openSelect : function(){
+				if(!(this.disabled)){
+					this.stats = true;
+				}
+			},
+
 			selectItem : function(option){
-				this.item = option;
+				const app = this;
+				app.item = option;
 				this.$emit('model', option);
 			}
 		},

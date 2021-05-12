@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<loading :active="loadingActive"/>
-		<MenuHeader title="Daftar Order Pembelian" 
-					subtitle="Daftar transaksi pembelian dapat dilihat disini" 
+		<MenuHeader title="Daftar Order Penjualan" 
+					subtitle="Daftar order dan transaksi penjualan dapat dilihat disini" 
 					@refresh="getData()"/>
 		
 		<div class="grid grid-cols-3 gap-3 px-10">
@@ -35,10 +35,10 @@
 
 <script type="text/javascript">
 	import MenuHeader from '@/modules/order/menuHeader.vue'
-	import Tables from '../../../components/table.vue';
+	import Tables from '@/components/table.vue';
 	import Pencil from '@/assets/icons/pencil.vue';
 	import Loading from 'vue-loading-overlay';
-	import {formatRupiah, DEFAULT_ENDPOINT} from '../../../functions/universal.js';
+	import {formatRupiah, DEFAULT_ENDPOINT} from '@/functions/universal.js';
 	const axios = require('axios');
 
 	export default{
@@ -49,25 +49,25 @@
 				loadingActive : false,
 				pembelian_data : [
 					{
-						title : "Pembelian Belum Dibayar",
+						title : "Penjualan Belum Dibayar",
 						color : "red",
 						total : 0,
 						len   : 0
 					},
 					{
-						title : "Pembelian Jatuh Tempo",
+						title : "Penjualan Jatuh Tempo",
 						color : "yellow",
 						total : 0,
 						len   : 0
 					},
 					{
-						title : "Pembelian Selesai",
+						title : "Penjualan Selesai",
 						color : "green",
 						total : 0,
 						len   : 0
 					}
 				],
-				table_head : ["ID", "SUPPLIER", "TANGGAL INVOICE / JATUH TEMPO", "STATUS", "TAGIHAN", "AKSI"],
+				table_head : ["ID", "SALES", "PELANGGAN", "TANGGAL INVOICE / JATUH TEMPO", "STATUS", "TAGIHAN", "AKSI"],
 				table_body : [],
 			}
 		},
@@ -82,7 +82,7 @@
 			getData : function(){
 				const app = this;
 				app.loadingActive = true;
-				axios.get(DEFAULT_ENDPOINT + "/pembelian")
+				axios.get(DEFAULT_ENDPOINT + "/orders/penjualan")
 				     .then(response => {
 				     	console.log(response);
 				     	app.pembelian_data[0].total = response.data.pembelian_belum_dibayar;

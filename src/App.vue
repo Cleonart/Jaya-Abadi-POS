@@ -2,11 +2,13 @@
   <div class="md:flex flex-col md:flex-row min-h-screen w-full">
       <Sidebar :color="color"></Sidebar>
       <div class="w-full relative bg-gray-50">
-        <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </router-view>
+        <div class="mb-28">
+          <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
+        </div>
         <Footer/>
       </div>
   </div>
@@ -53,15 +55,6 @@ input[type=number] {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
-
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
 </style>
 
 <script>

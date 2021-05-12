@@ -125,8 +125,12 @@
 		                link : "/#/penjualan/pos"
 		              },
 		              {
-		                name : "Sales Order",
-		                link : "#"
+		                name : "Daftar",
+		                link : "/#/order/penjualan"
+		              },
+		              {
+		              	name : "Order Baru",
+		              	link : "/#/order/penjualan/baru"
 		              },
 		              {
 		                name : "Invoice",
