@@ -118,7 +118,7 @@ const routes = [
     component: DataOrderSales 
   },
   {
-    path: '/order/penjualan/:id',
+    path: '/order/penjualan/nomor/:id',
     name: "Penjualan Order",
     component: OrderSales
   },

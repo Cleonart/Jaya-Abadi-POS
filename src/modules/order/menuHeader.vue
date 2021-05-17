@@ -31,16 +31,18 @@
 
 	export default{
 		components : {questionMarkCircle, refresh, plus},
-		props : ["title", "subtitle"],
+		props : ["title", "subtitle", 'route'],
 		data(){
 			return{
 				refreshAnimation : ""
 			}
 		},
 		methods : {
+
 			directTo : function(){
-				this.$router.replace("/order/pembelian/nomor/baru");
+				this.$router.replace(this.route);
 			},
+
 			refresh : function(){
 				const app = this;
 				app.refreshAnimation = "animate-spin";

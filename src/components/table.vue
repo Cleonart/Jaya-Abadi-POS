@@ -19,6 +19,9 @@
 						<!-- badge danger -->
 						<span v-if="item.type == 'badge_danger'" class="rounded-full bg-red-100 text-red-700 px-4 py-1.5">{{item.text}}</span>
 
+						<!-- badge warning -->
+						<span v-if="item.type == 'badge_warning'" class="rounded-full bg-yellow-100 text-yellow-700 px-4 py-1.5">{{item.text}}</span>
+
 						<!-- text -->
 						<span v-else-if="item.type == 'text'">{{item.text}}</span>
 

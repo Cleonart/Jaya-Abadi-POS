@@ -130,7 +130,7 @@
 		              },
 		              {
 		              	name : "Order Baru",
-		              	link : "/#/order/penjualan/baru"
+		              	link : "/#/order/penjualan/nomor/baru"
 		              },
 		              {
 		                name : "Invoice",
@@ -155,6 +155,14 @@
 		              },
 		              {
 		                name : "Merek",
+		                link : "/#/pengaturan/merek"
+		              },
+		              {
+		                name : "Transfer Stok",
+		                link : "/#/pengaturan/merek"
+		              },
+		              {
+		                name : "Stok Opname",
 		                link : "/#/pengaturan/merek"
 		              }
 		            ]

@@ -146,9 +146,17 @@
 
 		<div class="bg-gray-50 relative mb-20 w-full mt-5">
 			<div class="absolute top-1/2 transform -translate-y-2/4 right-16">
-				<button class="text-white rounded-md font-semibold text-sm mr-2 bg-red-500 px-3 py-3">Batal</button>
-				<button @click="postData('ST202')" class="blue-glow-button text-sm h-10 mr-2"><Save class="mr-2 -mt-1" />Buat Order</button>
-				<button @click="postData('ST200')" class="green-glow-button text-sm h-10"><Cash class="mr-2" />Buat Order dan Bayar</button>
+				<button @click="backToHome()" class="text-white rounded-md font-semibold text-sm mr-2 bg-red-500 px-3 py-3">Batal</button>
+				<button v-if="pembelian_data.pembelian_status != 'ST200'"
+						@click="postData('ST202')" class="blue-glow-button text-sm h-10 mr-2"><Save class="mr-2 -mt-1" />
+					<span v-if="pembelian_data.pembelian_status == 'ST202'">Perbarui Data Order</span>
+					<span v-else>Buat Order</span>
+				</button>
+				<button v-if="pembelian_data.pembelian_status != 'ST200'"
+						@click="postData('ST200')" class="green-glow-button text-sm h-10"><Cash class="mr-2" />
+					<span v-if="pembelian_data.pembelian_status == ''">Buat Order dan Bayar</span>
+					<span v-if="pembelian_data.pembelian_status == 'ST202'">Bayar</span>
+				</button>
 			</div>
 		</div>
 
@@ -292,6 +300,10 @@
 			}
 		},
 		methods : {
+			
+			backToHome : function(){
+				this.$router.replace("/order/penjualan");
+			},
 
 			addItem : function(barang){
 				let item_exist = false;
@@ -336,12 +348,17 @@
 				axios.get(DEFAULT_ENDPOINT + "/order/" + app.$route.params.id)
 					 .then(response => {
 					 	console.log(response);
-					 	app.data_supplier  = response.data.data_supplier;
-					 	app.data_product   = response.data.data_product;
-					 	app.data_satuan    = response.data.data_satuan;
-					 	app.data_pelanggan = response.data.data_pelanggan;
-						app.data_pengguna  = response.data.data_pengguna;
-						sweet.close();
+					 	setTimeout(function(){
+					 		app.data_supplier  = response.data.data_supplier;
+						 	app.data_product   = response.data.data_product;
+						 	app.data_satuan    = response.data.data_satuan;
+						 	app.data_pelanggan = response.data.data_pelanggan;
+							app.data_pengguna  = response.data.data_pengguna;
+							if(response.data.data_order != undefined){
+						 		app.pembelian_data = response.data.data_order; 
+						 	}
+							sweet.close();
+					 	}, 500)
 				})
 			},
 
@@ -369,6 +386,7 @@
 								'Data pembelian berhasil diubah',
 								'success'
 							);
+						this.backToHome();
 					})
 				}})
 			}

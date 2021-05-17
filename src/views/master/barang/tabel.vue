@@ -50,7 +50,7 @@
 				loadingActive : true,
 
 				// changeable
-				table_head : ["KODE", "KATEGORI", "NAMA", "MERK", "VARIAN", "HARGA", "STOK TOKO", "STOK GUDANG", "AKSI"],
+				table_head : ["KODE", "KATEGORI", "NAMA", "MERK", "HARGA", "STOK TOKO / GUDANG", "AKSI"],
 				defaultUrl : ""
 			}
 		},

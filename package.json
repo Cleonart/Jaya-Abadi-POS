@@ -16,6 +16,7 @@
     "sweetalert2": "^10.16.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^3.0.0",
+    "vue-clipboard2": "^0.3.1",
     "vue-loading-overlay": "^4.0.1",
     "vue-router": "^4.0.0-0",
     "vue-search-select": "^2.9.3",

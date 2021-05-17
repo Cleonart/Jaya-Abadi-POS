@@ -3,7 +3,8 @@
 		<loading :active="loadingActive"/>
 		<MenuHeader title="Daftar Order Penjualan" 
 					subtitle="Daftar order dan transaksi penjualan dapat dilihat disini" 
-					@refresh="getData()"/>
+					@refresh="getData()"
+					route="/order/penjualan/nomor/baru"/>
 		
 		<div class="grid grid-cols-3 gap-3 px-10">
 			<div class="col-1" v-for="item in pembelian_data">
@@ -21,7 +22,7 @@
 			<Tables class="mt-10" :table_head="table_head" :table_body="table_body">
 				<template v-slot:default="props">
 					<div class="flex my-1">
-						<a :href="'/#/order/pembelian/' + props.actionProps[0].text">
+						<a :href="'/#/order/penjualan/nomor/' + props.actionProps[0].text">
 							<span class="px-2 py-2 bg-green-100 text-green-700 mr-2 pointer rounded-md hover:bg-gray-800 hover:text-white transition">
 								<Pencil/>
 							</span>
@@ -86,6 +87,7 @@
 				     .then(response => {
 				     	console.log(response);
 				     	app.pembelian_data[0].total = response.data.pembelian_belum_dibayar;
+				     	app.pembelian_data[1].total = response.data.pembelian_jatuh_tempo;
 				     	app.pembelian_data[2].total = response.data.pembelian_selesai;
 				     	app.table_body = response.data.pembelian_data;
 				     	setTimeout(function(){

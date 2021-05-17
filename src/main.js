@@ -5,5 +5,6 @@ import './assets/tailwind.css';
 import './assets/global.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import VueClipboard from 'vue-clipboard2'
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router, VueClipboard).mount('#app')
