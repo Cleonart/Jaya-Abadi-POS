@@ -44,7 +44,8 @@
 	import Loading from 'vue-loading-overlay';
 	
 	// API's
-	import {formatRupiah, DEFAULT_ENDPOINT} from '@/functions/universal.js';
+	import {DEFAULT_ENDPOINT} from '@/core/APIService.js';
+	import {formatRupiah} from '@/functions/universal.js';
 	const axios = require('axios');
 
 	export default{

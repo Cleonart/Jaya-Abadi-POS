@@ -44,7 +44,7 @@
 	import Trash from '@/assets/icons/trash.vue'
 
 	// API's
-	import {DEFAULT_ENDPOINT} from '@/functions/universal.js';
+	import {DEFAULT_ENDPOINT} from '@/core/APIService.js';
 
 	export default{
 		data(){

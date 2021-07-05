@@ -67,7 +67,8 @@
 	import InformationCircle from '@/assets/icons/informationCircle.vue';
 
 	// api
-	import {formatRupiah, DEFAULT_ENDPOINT, startLoading, endLoading} from '@/functions/universal.js';
+	import {DEFAULT_ENDPOINT} from '@/core/APIService.js';
+	import {formatRupiah, startLoading, endLoading} from '@/functions/universal.js';
 	const sweet = require('sweetalert2');
 	const axios = require('axios');
 

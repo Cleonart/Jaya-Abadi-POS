@@ -27,7 +27,7 @@
 
 	const axios = require('axios');
 	import Tables from '@/components/table.vue';
-	import {DEFAULT_ENDPOINT} from '@/functions/universal.js';
+	import {DEFAULT_ENDPOINT} from '@/core/APIService.js';
 
 	export default{
 		data(){
