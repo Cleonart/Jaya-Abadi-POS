@@ -95,7 +95,7 @@
 				const app = this;
 				sweet.fire({
 					title: 'Anda yakin?',
-					text: "Apakah anda yakin ingin menambahkan transaksi pembelian ini?",
+					text: "Apakah anda yakin ingin memproses data ini?",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#2ecc71',

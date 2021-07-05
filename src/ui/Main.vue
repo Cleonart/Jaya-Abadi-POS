@@ -1,5 +1,17 @@
 <template>
-  <router-view></router-view>
+  <div class="md:flex flex-col md:flex-row min-h-screen w-full">
+      <Sidebar :color="color"></Sidebar>
+      <div class="w-full relative bg-gray-50">
+        <div class="mb-28">
+          <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
+        </div>
+        <Footer/>
+      </div>
+  </div>
 </template>
 
 <style type="text/css">

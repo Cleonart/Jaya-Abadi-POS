@@ -28,7 +28,7 @@ export function startLoading(alert_){
 	alert_.fire({
 		icon: 'warning',
 		title: 'Mohon tunggu',
-		text: 'Sedang mengirim data...',
+		text: 'Memproses data...',
 		allowOutsideClick: false,
 		showConfirmButton: false,
 		timerProgressBar: true,

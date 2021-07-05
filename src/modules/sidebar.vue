@@ -20,7 +20,8 @@
 				:class="{'hidden' : !dropdown_open, 'block' : dropdown_open}" >
 
 				<!-- button -->
-				<p class="flex font-bold w-auto pl-4 rounded py-2 text-sm text-white pointer hover:bg-green-600 hover:text-green-200 transition mx-3 bg-green-300 bg-opacity-60 mb-5 relative"><svg class="w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>Point of Sales</p>
+				<router-link to="/order/pos">
+				<p class="flex font-bold w-auto pl-4 rounded py-2 text-sm text-white pointer hover:bg-green-600 hover:text-green-200 transition mx-3 bg-green-300 bg-opacity-60 mb-5 relative"><svg class="w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>Point of Sales</p></router-link>
 
 				<div v-for="(link,index) in sidebar" :key='index' class="cursor-pointer">
 					<p class="relative px-3 flex py-2.5 text-white font-semibold text-sm hover:bg-white hover:text-green-500 rounded transition" @click="dropdownOpen(index)">
@@ -96,6 +97,10 @@
 		              {
 		                name : "Pengguna",
 		                link : "/#/master/pengguna"
+		              },
+		              {
+		                name : "Data Perusahaan",
+		                link : "/#/master/perusahaan"
 		              }]
 		          },
 		          {
@@ -109,7 +114,7 @@
 		              },
 		              {
 		                name : "Pembelian",
-		                link : '/#/order/pembelian/nomor/baru'
+		                link : '/#/order/pembelian/baru'
 		              },
 		              {
 		                name : "Retur Beli",
@@ -122,7 +127,7 @@
 		            icon     : "M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0",
 		            child    : [{
 		                name : "Point of Sales",
-		                link : "/#/penjualan/pos"
+		                link : "/#/order/pos"
 		              },
 		              {
 		                name : "Daftar",
@@ -130,7 +135,7 @@
 		              },
 		              {
 		              	name : "Order Baru",
-		              	link : "/#/order/penjualan/nomor/baru"
+		              	link : "/#/order/penjualan/baru"
 		              },
 		              {
 		                name : "Invoice",

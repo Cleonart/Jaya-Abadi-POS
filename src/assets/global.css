@@ -9,10 +9,48 @@ body{
 	font-family: "Lato";
 }
 
-/* Fade Animation */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .4s;
+/* Glow Button */
+.blue-glow-button{
+  @apply font-bold bg-blue-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-blue-600 inline-block;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.green-glow-button{
+  @apply font-bold bg-green-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-green-600 inline-block;
+}
+
+.yellow-glow-button{
+  @apply font-bold bg-yellow-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-yellow-600 inline-block;
+}
+
+
+.red-glow-button{
+  @apply font-bold bg-red-100 px-4 py-2 transition hover:bg-gray-900 hover:text-white cursor-pointer rounded-md text-red-600 inline-block;
+}
+
+
+.center-h-v{
+  @apply top-1/2 right-1/2 -translate-y-2/4 translate-x-2/4 transform;
+}
+
+.center-v{
+  @apply top-1/2 -translate-y-2/4 transform;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active{
+  transition: all .2s ease;
+}
+
+.slide-fade-enter-from, .slide-fade-leave-to{
+  transform:translateX(193px);
   opacity: 0;
 }
