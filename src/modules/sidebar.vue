@@ -100,7 +100,7 @@
 		              },
 		              {
 		                name : "Data Perusahaan",
-		                link : "/#/master/perusahaan"
+		                link : "/#/master/perusahaan/default"
 		              }]
 		          },
 		          {

@@ -8,7 +8,7 @@ const FormBarang = () => import("./views/form_barang.vue");
 const FormPelanggan = () => import("./views/form_pelanggan.vue");
 const FormSupplier = () => import("./views/form_supplier.vue");
 const FormPengguna = () => import("./views/form_pengguna.vue");
-
+const FormPerusahaan = () => import("./views/form_perusahaan.vue");
 
 const moduleRoute = {
 	path : "master",
@@ -75,12 +75,8 @@ const moduleRoute = {
 			component : Module,
 			children : [
 				{
-					path : "",
-					component : Pengguna
-				},
-				{
 					path : ":id",
-					component : FormPengguna
+					component : FormPerusahaan
 				}
 			]
 		},

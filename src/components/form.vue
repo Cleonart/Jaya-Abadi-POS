@@ -55,12 +55,16 @@
 </style>
 
 <script type="text/javascript">
-	
-	import {DEFAULT_ENDPOINT, startLoading} from '../functions/universal.js';
+
+	// API's
+	import {DEFAULT_ENDPOINT} from '@/core/APIService.js';
+	const axios = require('axios');
+
+	// UI's
+	import {startLoading} from '../functions/universal.js';	
 	import Save from '@/assets/icons/save.vue';
 	import ChevronLeft from '@/assets/icons/chevronLeft.vue';
 	import Loading from 'vue-loading-overlay';
-	const axios = require('axios');
 	const sweet = require('sweetalert2');
 
 	export default{
@@ -86,8 +90,6 @@
 				 .then(response => {
 				 	app.input_group = response.data;
 				 	app.loadingState = false;
-				 	console.log(response.data);
-
 				})
 			},
 
