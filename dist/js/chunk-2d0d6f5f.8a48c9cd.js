@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d6f5f"],{"757b":function(e,o,a){"use strict";a.r(o);var n=a("7a23");function r(e,o,a,r,t,c){var s=Object(n["resolveComponent"])("ComponentForms");return Object(n["openBlock"])(),Object(n["createBlock"])("div",null,[Object(n["createVNode"])(s,{home:"/",title:"Kelola Data Perusahaan",url_get:"/master/perusahaan/form",url_post:"/master/perusahaan/form"})])}var t=a("5898"),c={components:{ComponentForms:t["a"]}};c.render=r;o["default"]=c}}]);
+//# sourceMappingURL=chunk-2d0d6f5f.8a48c9cd.js.map

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0bdf15"],{"2dc0":function(e,n,r){"use strict";r.r(n);var a=r("7a23");function o(e,n,r,o,t,c){var m=Object(a["resolveComponent"])("ComponentForms");return Object(a["openBlock"])(),Object(a["createBlock"])("div",null,[Object(a["createVNode"])(m,{home:"/master/barang",title:"Tambahkan Barang Baru",url_get:"/master/barang/form",url_post:"/master/barang/form"})])}var t=r("5898"),c={components:{ComponentForms:t["a"]}};c.render=o;n["default"]=c}}]);
+//# sourceMappingURL=chunk-2d0bdf15.1219c87a.js.map

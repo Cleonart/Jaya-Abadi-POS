@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2214b0"],{ca73:function(e,o,r){"use strict";r.r(o);var t=r("7a23");function n(e,o,r,n,p,c){var s=Object(t["resolveComponent"])("ComponentForms");return Object(t["openBlock"])(),Object(t["createBlock"])("div",null,[Object(t["createVNode"])(s,{home:"/master/supplier",title:"Kelola Supplier",url_get:"/master/supplier/form",url_post:"/master/supplier/form"})])}var p=r("5898"),c={components:{ComponentForms:p["a"]}};c.render=n;o["default"]=c}}]);
+//# sourceMappingURL=chunk-2d2214b0.6e4c6145.js.map
