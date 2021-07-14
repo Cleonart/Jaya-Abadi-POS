@@ -4,11 +4,15 @@
 		<Header title="Daftar Barang" subtitle="Kelola daftar barang disini" @refresh="getDataTable()"/>
 		
 		<div class="rounded-md shadow mx-10 relative bg-white">
-			<div class="flex px-5 pt-4 pb-4 relative">
-				<SearchBar class="w-full md:w-4/5" :value="search_bar" placeholder="Cth. Paku" @input="search_bar = $event.target.value"/>
-				<div class="absolute right-10 top-1/2 -translate-y-2/4 transform mt-1">
-					<p @click="directForm()" class="green-button"><Plus class="mr-2 -mt-1"/>Tambah Barang</p>
-					<p @click="directForm()" class="green-glow-button ml-2"><CloudUpload class="mr-2 -mt-1"/>Import CSV</p>
+			<div class="grid grid-cols-1 md:grid-cols-2 px-5 pt-4 pb-4 relative">
+				<SearchBar class="col-span-1 md:w-4/5" :value="search_bar" placeholder="Cth. Paku" @input="search_bar = $event.target.value"/>
+				<div class="col-span-1 flex md:justify-end md:space-x-2">
+					<button @click="directForm()" class="my-auto md:max-h-11 green-button">
+						<Plus class="mr-2 -mt-1"/>Tambah Barang
+					</button>
+					<button class="my-auto md:max-h-11 green-glow-button">
+						<CloudUpload class="mr-2 -mt-1"/>Import CSV
+					</button>
 				</div>
 			</div>
 			<Tables :table_head="table_head" :table_body="filteredData">

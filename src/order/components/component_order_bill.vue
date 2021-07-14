@@ -15,6 +15,42 @@
 -->
 <template>
 	<section class="order-bill-container">
+		
+		<!-- Transaction Modal -->
+		<Modal ref="modal_transaction">
+			<template v-slot:content>
+				<section class="mb-3">
+					<h1 class="text-lg font-bold">Format Transaksi</h1>
+					<p class="text-sm text-gray-500">Selesaikan transaksi disini</p>
+				</section>
+				<table>
+					<tr>
+						<td class="text-lg font-bold">Tagihan</td>
+						<td class="text-right text-lg font-bold">{{formatRupiah(order.order_total)}}</td>
+					</tr>
+				</table>
+				<section class="mt-3">
+					<p class="font-semibold text-gray-500 text-xs my-2">SWITCH TUNAI</p>
+					<hr/>
+					<table class="mt-2">
+						<tr>
+							<td>Jumlah Pembayaran</td>
+							<td>
+								<input type="number" placeholder="Nominal Pembayaran" v-model="transaction_nominal" class="text-right">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Kembalian</p>
+								<p class="text-xs mt-0.5 font-bold text-red-600">Perhatikan Uang Kembalian!</p>
+							</td>
+							<td class="text-right">{{formatRupiah(transaction_nominal - order.order_total)}}</td>
+						</tr>
+					</table>
+				</section>
+			</template>	
+		</Modal>
+
 		<table>
 			<thead>
 	    		<tr>
@@ -29,7 +65,8 @@
 			<tr>
 				<td>Potongan</td>
 				<td class="flex justify-end">
-					<select class="rounded-md mr-2 bg-green-100 text-xs px-1" v-model="discount_type">
+					<select class="rounded-md mr-2 bg-green-100 text-xs px-1" 
+							v-model="order.order_diskon_tipe">
 						<option selected value="RUPIAH">Rupiah</option>
 						<option value="PERCENTAGE">Persen</option>
 					</select>
@@ -48,10 +85,10 @@
 						<span class="text-green-600 bg-green-200 px-2 py-1 rounded-full" 
 							v-if="order.order_diskon == 0">Tidak ada potongan</span>
 						<span class="text-red-50 bg-red-600 px-2 py-1 rounded-full" v-else>
-							<span v-if="discount_type == 'RUPIAH'">
+							<span v-if="order.order_diskon_tipe == 'RUPIAH'">
 								-{{formatRupiah(order.order_diskon)}}
 							</span>
-							<span v-if="discount_type == 'PERCENTAGE'">
+							<span v-if="order.order_diskon_tipe == 'PERCENTAGE'">
 								{{order.order_diskon}}%
 							</span>
 						</span>
@@ -59,17 +96,27 @@
 				</td>
 			</tr>
 		</table>
-		<div class="w-full grid gap-2 mt-3" :class="{'md:grid-cols-2' : enableSavedOrder}">
-			<button v-show="enableSaveOrder" @click="processOrder('ST201')" 
-					class="blue-glow-button">Simpan</button>
-			<button class="green-glow-button" @click="processOrder('ST200')">Bayar & Selesai</button>
+		<div class="w-full grid gap-2 mt-3" 
+			v-show="order_status" 
+			:class="{'md:grid-cols-2' : enableSaveOrder}">
+			<button v-show="enableSaveOrder" 
+					@click="processOrder('ST202')" 
+					class="blue-glow-button">
+					<Save class="-mt-1 mr-1"/> Simpan</button>
+			<button class="green-glow-button" 
+					@click="$refs.modal_transaction.openModal()">
+					<Cash class="-mt-1 mr-1"/> Selesai</button>
 		</div>
+		<button class="red-glow-button w-full mt-3"
+				@click="$router.go(-1)" 
+				v-show="!order_status">Batal</button>
 	</section>
 </template>
 
 <script type="text/javascript">
 
 	// Peripheral
+	import Modal from "@/components/modal.vue";
 	import {formatRupiah} from '@/functions/universal.js';
 
 	// API's
@@ -78,20 +125,23 @@
 
 	// UI's
 	import {start} from '@/core/SwalLoader.js';
+	import Save from '@/assets/icons/save.vue';
+	import Cash from '@/assets/icons/cash.vue';
 	const sweet = require('sweetalert2');
 
 	export default{
 		data(){
 			return{
-				// Discount separated into multi select
-				// "RUPIAH" : Discount according to specific amount of money
-				// "PERCENTAGE" : Discount according to order_sub_total percentage
-				discount_type : "RUPIAH"
+				transaction_nominal : ""
 			}
 		},
 		props : {
 			order : Object,
 			enableSaveOrder : Boolean,
+			apiEndpoint : String
+		},
+		components : {
+			Modal, Save, Cash
 		},
 		computed : {
 			order_total(){
@@ -99,7 +149,7 @@
 				let subtotal = this.order.order_sub_total;
 
 				// Discount with Rupiah Selected
-				if(this.discount_type == "RUPIAH"){
+				if(this.order.order_diskon_tipe == "RUPIAH"){
 					let discount_value = this.order.order_diskon;
 					this.order.order_total = subtotal - discount_value;
 					return this.order.order_total;
@@ -114,12 +164,29 @@
 				// Trigger v-model
 				this.$emit("input", this.order);
 				return this.order.order_total = subtotal - discount_percentage;
+			},
+			order_status(){
+				if(this.order.order_status != "ST200"){
+					return true;
+				}
+				return false;
 			}
 		},
 		watch : {
 
+			// Discount separated into multi select
+			// "RUPIAH" : Discount according to specific amount of money
+			// "PERCENTAGE" : Discount according to order_sub_total percentage
 			"order.order_diskon"(discount_value){
-				
+				this.discountHandler(discount_value);
+			},
+			"order.order_diskon_tipe"(discount_type){
+				this.discountHandler(this.order.order_diskon);
+			},
+		},
+		methods : {
+
+			discountHandler(discount_value){
 				let title = "Operasi Ilegal";
 				let subtitle = "<b>Potongan</b> tidak boleh melebihi nilai \
 								<b class='text-red-600'>subtotal</b>"
@@ -130,7 +197,7 @@
 					return;
 				}
 
-				if(this.discount_type == "PERCENTAGE"){
+				if(this.order.order_diskon_tipe == "PERCENTAGE"){
 					if(discount_value > 100){
 						this.order.order_diskon = 0;
 						sweet.fire(title, subtitle, "error");
@@ -143,14 +210,11 @@
 					this.order.order_diskon = 0;
 					sweet.fire(title, subtitle, "error");
 				}
-			}
-		},
-		methods : {
-
+			},
 
 			processOrder(order_status){
 				const APP = this;
-				const ENDPOINT = DEFAULT_ENDPOINT + "/order/pos/form";
+				const ENDPOINT = DEFAULT_ENDPOINT + APP.apiEndpoint;
 				this.order.order_status = order_status;
 
 				sweet.fire({
@@ -170,7 +234,7 @@
 									'Pesanan Berhasil Diproses',
 									'Data pesanan berhasil diproses',
 									'success');
-								APP.$router.replace("/order/penjualan");
+								APP.$emit('callback', "success");
 							})
 					}
 				}).catch(error => {
@@ -178,7 +242,7 @@
 						'Proses Pesanan Gagal',
 						'Aww, nampaknya pesanan gagal diproses, silahkan memeriksa jaringan internet anda, jika internet anda berjalan baik, silahkan mencoba me-refresh ulang aplikasi mencoba memproses pesanan lagi',
 						'error');
-					console.log(error);
+					APP.$emit('callback', "error");
 				});
 			},
 
@@ -200,7 +264,7 @@
 <style scoped>
 	
 	.order-bill-container{
-		@apply px-7 py-3 border-t
+		@apply px-7 py-3 mb-3;
 	}
 
 	table{
@@ -214,4 +278,5 @@
 	th, td{
 		padding-bottom: 7px;
 	}
+
 </style>

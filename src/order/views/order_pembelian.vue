@@ -48,6 +48,9 @@
 	import {formatRupiah} from '@/functions/universal.js';
 	const axios = require('axios');
 
+	// Peripheral
+	import {sum} from "@/core/Math.js";
+
 	export default{
 		components : {Tables, Pencil, MenuHeader, Loading},
 		data(){
@@ -98,20 +101,20 @@
 				     	app.table_body = response.data;
 				     	
 				     	// ST202 - Data Order Belum Dibayar
-				     	app.order_status[0].total = app.sum(app.filter_order_transaction("MENUNGGU PEMBAYARAN"));
+				     	app.order_status[0].total = sum(app.filter_order_transaction("MENUNGGU PEMBAYARAN"), 4);
 				     	app.order_status[0].len = app.filter_order_transaction("MENUNGGU PEMBAYARAN").length;
 				     	
 				     	// ST201 Data Order Jatuh Tempo
-				     	app.order_status[1].total = app.sum(app.filter_order_transaction("JATUH TEMPO"));
+				     	app.order_status[1].total = sum(app.filter_order_transaction("JATUH TEMPO"), 4);
 				     	app.order_status[1].len = app.filter_order_transaction("JATUH TEMPO").length;
 				     	
 				    	// ST200 Data Order Selesai
-				     	app.order_status[2].total = app.sum(app.filter_order_transaction("SELESAI"));
+				     	app.order_status[2].total = sum(app.filter_order_transaction("SELESAI"), 4);
 				     	app.order_status[2].len = app.filter_order_transaction("SELESAI").length;
 
 				     	setTimeout(function(){
 				     		app.loadingActive = false;
-				     	},500);
+				     	},200);
 				     })
 			},
 
@@ -124,15 +127,6 @@
 					return tableData[3].text.toLowerCase().includes(order_status.toLowerCase());
 				})
 			},
-
-			sum(arr, position){
-				let sum = 0;
-				arr.forEach(order => {
-					sum += parseInt(order[4].text);
-				})
-				return sum;
-			},
-
 		},
 		created(){
 			this.getData();

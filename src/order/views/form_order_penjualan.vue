@@ -116,52 +116,12 @@
 
 		<hr class="mb-3" />
 
-		<section class="grid md:grid-cols-6 px-10">
-			<div class="col-span-4"></div>
-			<div class="col-span-2 flex px-5 py-5 mb-3">
-				<div class="w-1/2">
-					<p class="mb-3">Sub Total</p>
-					<p class="mb-3">Potongan</p>
-					<p class="text-xl mt-5 font-bold">Tagihan</p>
-				</div>
-				<div class="w-1/2 text-right">
-					<p class="mb-3 text-right" >{{formatRupiah(order.order_sub_total)}}</p>
-					<div class="flex w-full">
-						<select v-model="disc_type" class="rounded-md mr-2 bg-green-100 text-xs px-1">
-							<option value="1">Rupiah</option>
-							<option value="2">Persen</option>
-						</select>
-						<input type="number" class="border w-full rounded-md text-sm px-1 pl-2 py-1" 
-							v-model="order.order_diskon"/>
-					</div>
-					<p class="text-xl mt-3 font-bold">
-						{{formatRupiah(order_total)}}</p>
-					<p class="font-semibold text-xs mt-2">
-						<span class="text-green-600 bg-green-200 px-2 py-1 rounded-full" 
-							v-if="order.order_diskon == 0">Tidak ada potongan</span>
-						<span class="text-red-50 bg-red-600 px-2 py-1 rounded-full" v-else>
-							<span v-if="disc_type == 1">-{{formatRupiah(order.order_diskon)}}</span>
-							<span v-if="disc_type == 2">{{order.order_diskon}}%</span>
-						</span>
-					</p>
-				</div>
-			</div>
-		</section>
-		<div class="bg-gray-50 relative mb-20 w-full mt-5">
-			<div class="absolute top-1/2 transform -translate-y-2/4 right-16">
-				<button @click="$router.go(-1)" 
-						class="text-white rounded-md font-semibold text-sm mr-2 bg-red-500 px-3 py-3">Batal</button>
-				<button v-if="order.order_status != 'ST200'"
-						@click="postData('ST202')" class="blue-glow-button text-sm h-10 mr-2">
-						<Save class="mr-2 -mt-1" />
-						<span v-if="order.order_status == 'ST202'">Perbarui Data Order</span>
-						<span v-else>Buat Order</span></button>
-				<button v-if="order.order_status != 'ST200'"
-						@click="postData('ST200')" class="green-glow-button text-sm h-10">
-						<Cash class="mr-2" />
-						<span v-if="order.order_status == ''">Buat Order dan Bayar</span>
-						<span v-if="order.order_status == 'ST202'">Bayar</span></button>
-			</div>
+		<div class="w-full lg:flex lg:justify-end">
+			<OrderBill class="w-full md:w-5/12"
+					@callback="$router.replace('/order/penjualan/')"
+					apiEndpoint="/order/penjualan/form" 
+					:enableSaveOrder=true
+					v-model:order="order"/>
 		</div>
 		<hr>
 		<section class="px-10 mt-7 mb-28">
@@ -195,6 +155,7 @@
 	import formHeader from '../components/formHeader.vue'
 	import formAddNewItem from '../components/formAddNewItem.vue'
 	import Order from '../models/Order.js'
+	import OrderBill from '../components/component_order_bill.vue'
 
 	// Components
 	import Text from '@/components/form_component/text.vue'
@@ -219,7 +180,7 @@
 	export default{
 		components : {formHeader, formAddNewItem, 
 					  Tables, Text, Select, Date, 
-					  Save, Cash, Plus, Trash, x},
+					  Save, Cash, Plus, Trash, x, OrderBill},
 
 		computed : {
 			order_item(){
@@ -234,55 +195,8 @@
 					return order_item;
 				}
 				return []
-			},
-			order_total(){
-				let subtotal = this.order.order_sub_total;
-
-				// Discount with Rupiah Mode
-				if(this.disc_type == 1){
-					let diskon = this.order.order_diskon;
-					this.order.order_total = subtotal - diskon;
-					return this.order.order_total;
-				}
-
-				// Discount with Percentage Mode
-				let diskon_input = this.order.order_diskon;
-				let diskon_persen = (subtotal * (diskon_input/100))
-				this.order.order_total = subtotal - diskon_persen;
 			}
 		},
-
-		watch : {
-
-			"order.order_diskon" :  function(val){
-				
-				let title = "Operasi Ilegal";
-				let subtitle = "<b>Potongan</b> tidak boleh melebihi nilai \
-								<b class='text-red-600'>subtotal</b>"
-
-				// Value of Discount can't less than 0
-				if(val < 0){
-					this.order.order_diskon = 0;
-					return;
-				}
-
-				if(this.disc_type == 2){
-					if(val > 100){
-						this.order.order_diskon = 0;
-						sweet.fire(title, subtitle, "error");
-						return;
-					}
-				}
-
-				// Value of Discount can't more than the total 	
-				if(val > this.order.order_sub_total){
-					this.order.order_diskon = 0;
-					sweet.fire(title, subtitle, "error");
-				}
-			},
-
-		},
-
 		data(){
 			return{
 				order : new Order(),
@@ -327,37 +241,6 @@
 							sweet.close();
 						},500);
 				})
-			},
-
-			postData(status_code){
-				const app = this;
-				const endpoint = DEFAULT_ENDPOINT + "/order/penjualan/form";
-
-				this.order.order_status = status_code;
-				sweet.fire({
-					title: 'Anda yakin?',
-					text: "Apakah anda yakin ingin menambahkan transaksi pembelian ini?",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#2ecc71',
-					cancelButtonColor: '#e74c3c',
-					confirmButtonText: 'Ya, Tambahkan'
-				}).then((result) => {
-					if(result.isConfirmed){
-						startLoading(sweet);
-						axios.post(endpoint, this.order)
-							 .then(response => {
-							sweet.fire(
-								'Proses Berhasil',
-								'Data pembelian berhasil diubah',
-								'success'
-							);
-						app.$router.replace("/order/penjualan");
-					})
-				}}).catch(error => {
-					console.log(error);
-					sweet.close();
-				});
 			}
 		},
 		created(){

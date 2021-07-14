@@ -62,7 +62,9 @@
 					v-if="order.order_item.length == 0">Daftar pesanan masih kosong :(</p>
 			</div>
 		</section>
-		<OrderBill v-model:order="order"/>
+		<OrderBill @callback="$router.replace('/order/penjualan')"
+				apiEndpoint="/order/pos/form"
+				v-model:order="order"/>
 	</div>
 </template>
 
@@ -110,6 +112,10 @@
 			},
 		},
 		methods : {
+
+			calls(){
+				alert("tes");
+			},
 
 			openModal(index){
 				this.$refs.modal.openModal();

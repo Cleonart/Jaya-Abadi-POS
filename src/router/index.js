@@ -13,6 +13,7 @@ import FormMerek from '../views/pengaturan/merek/form.vue'
 
 import Login from "@/ui/Login.vue"
 
+import Dashboard from "@/views/Dashboard.vue"
 import MasterRoute from "@/master"
 import OrderRoute from "@/order"
 
@@ -21,6 +22,11 @@ const routes = [
     path : "/",
     component : Main,
     children : [
+      {
+        path : "",
+        name : "Dashboard",
+        component : Dashboard
+      },
       MasterRoute.router,
       OrderRoute.router
     ]
@@ -29,7 +35,7 @@ const routes = [
     path : "/login",
     name : "Login",
     component : Login
-  },
+  }
 ]
 
 const router = createRouter({

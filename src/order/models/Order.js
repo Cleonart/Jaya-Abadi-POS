@@ -10,6 +10,7 @@ export default class Order{
     order_item  = [];
     order_pajak = 0;
     order_diskon = 0;
+    order_diskon_tipe="RUPIAH";
     order_sub_total = 0;
     order_total = 0;
 	order_status = "";

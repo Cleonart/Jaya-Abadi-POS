@@ -64,15 +64,18 @@
 			}
 		},
 		methods : {
+			
 			formatRupiah : function(angka){
 				return "Rp. " + formatRupiah(String(angka));
 			},
+
 			navigateToPage : function(page){
 				this.pagination_page_now = page;
 				this.pagination_start = (this.pagination_per_page * page) - (this.pagination_per_page - 1);
 				this.pagination_end	  = this.pagination_per_page * page;
 			}
 		},
+		
 		created(){
 			let number_of_item = this.table_body.length;
 			while(number_of_item > this.pagination_per_page){
